@@ -65,20 +65,46 @@ h1 {
   line-height: 1.6;
 }
 
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 24px;
+  align-items: center;
+}
+
+.primary-link,
 .contact-link {
   display: inline-flex;
   min-height: 44px;
   align-items: center;
-  border-bottom: 2px solid var(--accent);
   color: var(--accent-dark);
   font-weight: 700;
   text-decoration: none;
 }
 
+.primary-link {
+  min-height: 48px;
+  padding: 0 22px;
+  border: 2px solid var(--accent);
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.contact-link {
+  border-bottom: 2px solid var(--accent);
+}
+
+.primary-link:hover,
+.primary-link:focus-visible,
 .contact-link:hover,
 .contact-link:focus-visible {
   color: var(--ink);
   border-color: var(--ink);
+}
+
+.primary-link:hover,
+.primary-link:focus-visible {
+  background: transparent;
 }
 
 @media (max-width: 520px) {
