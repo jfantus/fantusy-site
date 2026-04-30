@@ -1,11 +1,11 @@
 :root {
   color-scheme: light;
-  --ink: #17211b;
-  --muted: #526158;
-  --paper: #f7f4ee;
-  --accent: #2f7f69;
-  --accent-dark: #1f5f4d;
-  --line: rgba(23, 33, 27, 0.14);
+  --ink: #111111;
+  --muted: #5d5d5d;
+  --paper: #ffffff;
+  --accent: #111111;
+  --accent-dark: #111111;
+  --line: rgba(17, 17, 17, 0.14);
 }
 
 * {
@@ -21,40 +21,40 @@ body {
   min-height: 100vh;
   margin: 0;
   color: var(--ink);
-  background:
-    linear-gradient(135deg, rgba(47, 127, 105, 0.12), transparent 42%),
-    radial-gradient(circle at 85% 20%, rgba(220, 110, 82, 0.22), transparent 30%),
-    var(--paper);
+  background: var(--paper);
 }
 
 .page-shell {
   display: grid;
   min-height: 100vh;
-  align-items: center;
-  padding: 48px 24px;
+  align-items: start;
+  padding: 32px 24px 56px;
 }
 
 .hero {
-  width: min(760px, 100%);
+  display: grid;
+  justify-items: center;
+  width: min(900px, 100%);
   margin: 0 auto;
-  padding: clamp(32px, 7vw, 80px) 0;
+  padding: 0;
+  text-align: center;
 }
 
-.eyebrow {
-  margin: 0 0 22px;
-  color: var(--accent-dark);
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0;
-  text-transform: uppercase;
+.fairy {
+  display: block;
+  width: min(620px, 94vw);
+  height: auto;
+  max-height: 68vh;
+  object-fit: contain;
 }
 
 h1 {
-  max-width: 11ch;
-  margin: 0;
-  font-size: clamp(3rem, 10vw, 7.5rem);
-  line-height: 0.95;
+  max-width: 100%;
+  margin: 18px 0 24px;
+  font-size: clamp(2.2rem, 7vw, 5.4rem);
+  line-height: 1;
   letter-spacing: 0;
+  text-transform: lowercase;
 }
 
 .lede {
@@ -84,10 +84,12 @@ h1 {
 
 .primary-link {
   min-height: 48px;
-  padding: 0 22px;
+  padding: 0 24px;
   border: 2px solid var(--accent);
-  background: var(--accent);
-  color: #ffffff;
+  background: var(--paper);
+  color: var(--ink);
+  text-transform: uppercase;
+  letter-spacing: 0;
 }
 
 .contact-link {
@@ -104,12 +106,17 @@ h1 {
 
 .primary-link:hover,
 .primary-link:focus-visible {
-  background: transparent;
+  background: var(--ink);
+  color: var(--paper);
 }
 
 @media (max-width: 520px) {
   .page-shell {
-    align-items: end;
-    padding: 32px 20px;
+    padding: 24px 18px 40px;
+  }
+
+  .fairy {
+    width: min(520px, 100%);
+    max-height: 60vh;
   }
 }
