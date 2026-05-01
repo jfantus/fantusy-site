@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" role="img" aria-labelledby="title desc">
+  <title id="title">Fantusy cybernetic men's health mark</title>
+  <desc id="desc">A professional cyberpunk-inspired logo combining a medical cross, circuit nodes, an abstract urology form, and a men's health signal.</desc>
+  <defs>
+    <linearGradient id="core" x1="140" y1="96" x2="510" y2="548" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#20f5d2"/>
+      <stop offset="0.54" stop-color="#6a7dff"/>
+      <stop offset="1" stop-color="#ff3ea5"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="80" y1="86" x2="574" y2="574" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#101a2a"/>
+      <stop offset="1" stop-color="#070a12"/>
+    </linearGradient>
+    <filter id="glow" x="-35%" y="-35%" width="170%" height="170%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.13 0 0 0 0 0.96 0 0 0 0 0.82 0 0 0 0.7 0"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="640" height="640" rx="72" fill="#070a12"/>
+  <path d="M96 148C96 119.3 119.3 96 148 96h344c28.7 0 52 23.3 52 52v344c0 28.7-23.3 52-52 52H148c-28.7 0-52-23.3-52-52V148Z" fill="url(#panel)" stroke="url(#core)" stroke-width="4"/>
+  <path d="M128 184h384M128 456h384M184 128v384M456 128v384" stroke="#1c2842" stroke-width="2"/>
+  <path d="M160 224h72l36-54h104l36 54h72M160 416h72l36 54h104l36-54h72" fill="none" stroke="#263657" stroke-width="3"/>
+
+  <g filter="url(#glow)">
+    <path d="M320 138c-83.4 0-151 67.6-151 151 0 68.7 45.8 126.7 108.5 145.1V502h85v-67.9C425.2 415.7 471 357.7 471 289c0-83.4-67.6-151-151-151Z" fill="none" stroke="url(#core)" stroke-width="18" stroke-linecap="round"/>
+    <path d="M320 210v158M241 289h158" stroke="#e9fbff" stroke-width="30" stroke-linecap="round"/>
+    <path d="M320 210v158M241 289h158" stroke="url(#core)" stroke-width="18" stroke-linecap="round"/>
+    <path d="M232 365c27.2 27.7 58.4 42 88 42s60.8-14.3 88-42" fill="none" stroke="#20f5d2" stroke-width="10" stroke-linecap="round"/>
+  </g>
+
+  <path d="M420 170h64v64M484 170l-78 78" fill="none" stroke="#ff3ea5" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M159 320h62l24-38 37 78 42-118 40 78h117" fill="none" stroke="#20f5d2" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <circle cx="159" cy="320" r="10" fill="#20f5d2"/>
+  <circle cx="481" cy="320" r="10" fill="#20f5d2"/>
+  <circle cx="184" cy="184" r="9" fill="#6a7dff"/>
+  <circle cx="456" cy="456" r="9" fill="#ff3ea5"/>
+  <circle cx="456" cy="184" r="7" fill="#20f5d2"/>
+  <circle cx="184" cy="456" r="7" fill="#20f5d2"/>
+</svg>
