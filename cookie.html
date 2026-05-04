@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <meta name="description" content="A password-protected cookie page.">
+    <title>Cookie</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #080912;
+        --panel: rgba(15, 19, 32, 0.86);
+        --ink: #fff6e8;
+        --muted: #b9a996;
+        --line: rgba(255, 214, 148, 0.2);
+        --cookie: #f0a949;
+        --chocolate: #5c2f20;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        padding: 28px;
+        background:
+          radial-gradient(circle at 20% 16%, rgba(240, 169, 73, 0.18), transparent 28%),
+          radial-gradient(circle at 80% 84%, rgba(92, 47, 32, 0.3), transparent 32%),
+          linear-gradient(135deg, #080912 0%, #17101a 100%);
+        color: var(--ink);
+        font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      main {
+        width: min(920px, 100%);
+      }
+
+      .gate,
+      .cookie-vault {
+        border: 1px solid var(--line);
+        background: var(--panel);
+        box-shadow: 0 30px 100px rgba(0, 0, 0, 0.42);
+      }
+
+      .gate {
+        display: grid;
+        gap: 18px;
+        max-width: 480px;
+        margin: 0 auto;
+        padding: 28px;
+      }
+
+      .gate[hidden],
+      .cookie-vault[hidden] {
+        display: none;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.4rem, 10vw, 5.2rem);
+        line-height: 0.95;
+        letter-spacing: 0;
+      }
+
+      p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      label {
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .password-row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 10px;
+      }
+
+      input,
+      button {
+        min-height: 48px;
+        border: 1px solid var(--line);
+        font: inherit;
+      }
+
+      input {
+        width: 100%;
+        padding: 0 14px;
+        background: rgba(8, 9, 18, 0.78);
+        color: var(--ink);
+        outline: none;
+      }
+
+      input:focus {
+        border-color: var(--cookie);
+        box-shadow: 0 0 0 4px rgba(240, 169, 73, 0.12);
+      }
+
+      button {
+        padding: 0 18px;
+        background: var(--cookie);
+        color: #190e07;
+        cursor: pointer;
+        font-weight: 800;
+      }
+
+      .error {
+        min-height: 20px;
+        color: #ff8a8a;
+        font-size: 0.92rem;
+      }
+
+      .cookie-vault {
+        display: grid;
+        gap: 24px;
+        padding: clamp(20px, 4vw, 34px);
+        text-align: center;
+      }
+
+      .cookie-vault img {
+        display: block;
+        width: min(680px, 100%);
+        height: auto;
+        margin: 0 auto;
+        border: 1px solid var(--line);
+      }
+
+      .tag {
+        color: var(--cookie);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      @media (max-width: 520px) {
+        .password-row {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="gate" id="gate" aria-labelledby="gate-title">
+        <p class="tag">restricted crumb access</p>
+        <h1 id="gate-title">Cookie?</h1>
+        <p>Enter the password to reveal the cookie.</p>
+        <form id="passwordForm">
+          <label for="password">Password</label>
+          <div class="password-row">
+            <input id="password" type="password" autocomplete="off" autofocus>
+            <button type="submit">Unlock</button>
+          </div>
+        </form>
+        <p class="error" id="error" aria-live="polite"></p>
+      </section>
+
+      <section class="cookie-vault" id="cookieVault" hidden aria-labelledby="cookie-title">
+        <p class="tag">access granted</p>
+        <h1 id="cookie-title">Cookie.</h1>
+        <img src="assets/chocolate-chip-cookie.png" alt="A large chocolate chip cookie">
+      </section>
+    </main>
+
+    <script>
+      const form = document.getElementById('passwordForm');
+      const password = document.getElementById('password');
+      const error = document.getElementById('error');
+      const gate = document.getElementById('gate');
+      const vault = document.getElementById('cookieVault');
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        if (password.value === 'Delores') {
+          gate.hidden = true;
+          vault.hidden = false;
+          return;
+        }
+
+        error.textContent = 'That is not the cookie password.';
+        password.select();
+      });
+    </script>
+  </body>
+</html>
