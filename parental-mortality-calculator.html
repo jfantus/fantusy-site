@@ -160,6 +160,43 @@
     transition: color 0.2s;
   }
 
+  .age-entry {
+    display: grid;
+    grid-template-columns: 1fr 76px;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .age-number {
+    width: 100%;
+    min-height: 44px;
+    padding: 0 10px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface2);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 18px;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .age-number:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-dim);
+  }
+
+  .input-group.father .age-number:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 4px var(--blue-dim);
+  }
+
+  .age-number::-webkit-outer-spin-button,
+  .age-number::-webkit-inner-spin-button {
+    margin: 0;
+  }
+
   .age-unit {
     font-family: var(--mono);
     font-size: 11px;
@@ -439,7 +476,10 @@
 
       <div class="input-group father">
         <label><span class="dot dot-father"></span> Father's Age</label>
-        <div class="age-display" id="fatherDisplay">30</div>
+        <div class="age-entry">
+          <div class="age-display" id="fatherDisplay">30</div>
+          <input class="age-number" type="number" id="fatherAgeInput" min="25" max="75" value="30" step="1" inputmode="numeric" aria-label="Father's age in years">
+        </div>
         <div class="age-unit">YEARS OLD</div>
         <input type="range" id="fatherSlider" min="25" max="75" value="30" step="1">
         <div class="range-bounds"><span>25</span><span>75</span></div>
@@ -447,7 +487,10 @@
 
       <div class="input-group mother">
         <label><span class="dot dot-mother"></span> Mother's Age</label>
-        <div class="age-display" id="motherDisplay">28</div>
+        <div class="age-entry">
+          <div class="age-display" id="motherDisplay">28</div>
+          <input class="age-number" type="number" id="motherAgeInput" min="25" max="75" value="28" step="1" inputmode="numeric" aria-label="Mother's age in years">
+        </div>
         <div class="age-unit">YEARS OLD</div>
         <input type="range" id="motherSlider" min="25" max="75" value="28" step="1">
         <div class="range-bounds"><span>25</span><span>75</span></div>
@@ -558,6 +601,8 @@
   // --- DOM refs ---
   const fSlider    = document.getElementById('fatherSlider');
   const mSlider    = document.getElementById('motherSlider');
+  const fAgeInput  = document.getElementById('fatherAgeInput');
+  const mAgeInput  = document.getElementById('motherAgeInput');
   const fDisplay   = document.getElementById('fatherDisplay');
   const mDisplay   = document.getElementById('motherDisplay');
   const fResult    = document.getElementById('fatherResult');
@@ -574,12 +619,46 @@
     el.classList.add('pulse');
   }
 
+  function clampAge(value) {
+    const age = Number.parseInt(value, 10);
+    if (Number.isNaN(age)) return null;
+    return Math.max(25, Math.min(75, age));
+  }
+
+  function syncAge(source, slider, numberInput) {
+    const nextAge = clampAge(source.value);
+    if (nextAge === null) return;
+    slider.value = nextAge;
+    numberInput.value = nextAge;
+    update();
+  }
+
+  function handleTypedAge(numberInput, slider) {
+    const age = Number.parseInt(numberInput.value, 10);
+    if (Number.isNaN(age) || age < 25 || age > 75) return;
+    slider.value = age;
+    update();
+  }
+
+  function commitTypedAge(numberInput, slider) {
+    const nextAge = clampAge(numberInput.value);
+    if (nextAge === null) {
+      numberInput.value = slider.value;
+      return;
+    }
+    slider.value = nextAge;
+    numberInput.value = nextAge;
+    update();
+  }
+
   function update() {
     const fAge = parseInt(fSlider.value);
     const mAge = parseInt(mSlider.value);
 
     fDisplay.textContent = fAge;
     mDisplay.textContent = mAge;
+    fAgeInput.value = fAge;
+    mAgeInput.value = mAge;
 
     const pf = interpolate(PATERNAL, fAge);
     const pm = interpolate(MATERNAL, mAge);
@@ -601,8 +680,12 @@
     animatePulse(cResult);
   }
 
-  fSlider.addEventListener('input', update);
-  mSlider.addEventListener('input', update);
+  fSlider.addEventListener('input', () => syncAge(fSlider, fSlider, fAgeInput));
+  mSlider.addEventListener('input', () => syncAge(mSlider, mSlider, mAgeInput));
+  fAgeInput.addEventListener('input', () => handleTypedAge(fAgeInput, fSlider));
+  mAgeInput.addEventListener('input', () => handleTypedAge(mAgeInput, mSlider));
+  fAgeInput.addEventListener('blur', () => commitTypedAge(fAgeInput, fSlider));
+  mAgeInput.addEventListener('blur', () => commitTypedAge(mAgeInput, mSlider));
 
   // Init
   update();
@@ -611,3 +694,4 @@
 </script>
 </body>
 </html>
+
