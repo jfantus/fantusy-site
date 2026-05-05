@@ -17,8 +17,8 @@
         <a href="about.html">About me</a>
         <a href="research.html">Research</a>
         <a href="services.html">Services</a>
-        <a href="parental-mortality-calculator.html">Mortality</a>
-        <a aria-current="page" href="prostate-volume-calculator.html">Volume</a>
+        <a href="parental-mortality-calculator.html">Parental Mortality Calculator</a>
+        <a aria-current="page" href="prostate-volume-calculator.html">Prostate Volume Calculator</a>
       </nav>
     </header>
 
@@ -27,7 +27,7 @@
         <p class="eyebrow">Calculator</p>
         <h1 id="volume-title">Prostate volume and PSA density.</h1>
         <p class="lede">
-          Enter prostate width, height, and length in centimeters. The calculator reports ellipsoid and bullet volume estimates, with optional PSA density if a PSA value is entered.
+          Enter prostate length, height, and width in centimeters. The same measurements feed both the bullet and ellipsoid formulas, with optional PSA density if a PSA value is entered.
         </p>
       </section>
 
@@ -36,19 +36,19 @@
           <h2 id="inputs-title">Inputs</h2>
           <div class="calc-input-grid">
             <label>
-              <span>Width</span>
-              <input id="widthInput" type="number" min="0" step="0.1" inputmode="decimal" placeholder="cm">
+              <span>Length</span>
+              <input id="lengthInput" type="number" min="0" step="0.1" inputmode="decimal" placeholder="cm">
             </label>
             <label>
               <span>Height</span>
               <input id="heightInput" type="number" min="0" step="0.1" inputmode="decimal" placeholder="cm">
             </label>
             <label>
-              <span>Length</span>
-              <input id="lengthInput" type="number" min="0" step="0.1" inputmode="decimal" placeholder="cm">
+              <span>Width</span>
+              <input id="widthInput" type="number" min="0" step="0.1" inputmode="decimal" placeholder="cm">
             </label>
             <label>
-              <span>PSA optional</span>
+              <span>PSA (optional)</span>
               <input id="psaInput" type="number" min="0" step="0.01" inputmode="decimal" placeholder="ng/mL">
             </label>
           </div>
@@ -56,24 +56,24 @@
 
         <div class="formula-grid" aria-label="Volume results">
           <article>
-            <span>Ellipsoid</span>
-            <strong id="ellipsoidVolume">--</strong>
-            <p>W x H x L x 0.523</p>
-            <dl>
-              <div>
-                <dt>PSA density</dt>
-                <dd id="ellipsoidDensity">Enter PSA</dd>
-              </div>
-            </dl>
-          </article>
-          <article>
             <span>Bullet</span>
             <strong id="bulletVolume">--</strong>
-            <p>W x H x L x 0.65</p>
+            <p>L x H x W x 0.65</p>
             <dl>
               <div>
                 <dt>PSA density</dt>
                 <dd id="bulletDensity">Enter PSA</dd>
+              </div>
+            </dl>
+          </article>
+          <article>
+            <span>Ellipsoid</span>
+            <strong id="ellipsoidVolume">--</strong>
+            <p>L x H x W x 0.523</p>
+            <dl>
+              <div>
+                <dt>PSA density</dt>
+                <dd id="ellipsoidDensity">Enter PSA</dd>
               </div>
             </dl>
           </article>
@@ -83,8 +83,8 @@
       <section class="source-band" aria-labelledby="formula-title">
         <h2 id="formula-title">Formula Notes</h2>
         <div class="source-links formula-notes">
-          <span>Ellipsoid volume = W x H x L x 0.523</span>
-          <span>Bullet volume = W x H x L x 0.65</span>
+          <span>Bullet volume = L x H x W x 0.65</span>
+          <span>Ellipsoid volume = L x H x W x 0.523</span>
           <span>PSA density = PSA / volume</span>
         </div>
       </section>
