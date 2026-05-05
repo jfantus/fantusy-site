@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Calculate prostate volume using ellipsoid and bullet formulas, with optional PSA density.">
+    <title>Prostate Volume Calculator | Fantusy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html">fantusy.org</a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="about.html">About me</a>
+        <a href="research.html">Research</a>
+        <a href="services.html">Services</a>
+        <a href="parental-mortality-calculator.html">Mortality</a>
+        <a aria-current="page" href="prostate-volume-calculator.html">Volume</a>
+      </nav>
+    </header>
+
+    <main class="content-page">
+      <section class="page-hero" aria-labelledby="volume-title">
+        <p class="eyebrow">Calculator</p>
+        <h1 id="volume-title">Prostate volume and PSA density.</h1>
+        <p class="lede">
+          Enter prostate width, height, and length in centimeters. The calculator reports ellipsoid and bullet volume estimates, with optional PSA density if a PSA value is entered.
+        </p>
+      </section>
+
+      <section class="calculator-panel" aria-labelledby="inputs-title">
+        <div class="calculator-form">
+          <h2 id="inputs-title">Inputs</h2>
+          <div class="calc-input-grid">
+            <label>
+              <span>Width</span>
+              <input id="widthInput" type="number" min="0" step="0.1" inputmode="decimal" placeholder="cm">
+            </label>
+            <label>
+              <span>Height</span>
+              <input id="heightInput" type="number" min="0" step="0.1" inputmode="decimal" placeholder="cm">
+            </label>
+            <label>
+              <span>Length</span>
+              <input id="lengthInput" type="number" min="0" step="0.1" inputmode="decimal" placeholder="cm">
+            </label>
+            <label>
+              <span>PSA optional</span>
+              <input id="psaInput" type="number" min="0" step="0.01" inputmode="decimal" placeholder="ng/mL">
+            </label>
+          </div>
+        </div>
+
+        <div class="formula-grid" aria-label="Volume results">
+          <article>
+            <span>Ellipsoid</span>
+            <strong id="ellipsoidVolume">--</strong>
+            <p>W x H x L x 0.523</p>
+            <dl>
+              <div>
+                <dt>PSA density</dt>
+                <dd id="ellipsoidDensity">Enter PSA</dd>
+              </div>
+            </dl>
+          </article>
+          <article>
+            <span>Bullet</span>
+            <strong id="bulletVolume">--</strong>
+            <p>W x H x L x 0.65</p>
+            <dl>
+              <div>
+                <dt>PSA density</dt>
+                <dd id="bulletDensity">Enter PSA</dd>
+              </div>
+            </dl>
+          </article>
+        </div>
+      </section>
+
+      <section class="source-band" aria-labelledby="formula-title">
+        <h2 id="formula-title">Formula Notes</h2>
+        <div class="source-links formula-notes">
+          <span>Ellipsoid volume = W x H x L x 0.523</span>
+          <span>Bullet volume = W x H x L x 0.65</span>
+          <span>PSA density = PSA / volume</span>
+        </div>
+      </section>
+
+      <p class="disclaimer">
+        This tool is for education and quick estimation. Clinical decisions should use the measurement method, imaging context, and physician judgment appropriate to the patient.
+      </p>
+    </main>
+
+    <script>
+      const widthInput = document.getElementById('widthInput');
+      const heightInput = document.getElementById('heightInput');
+      const lengthInput = document.getElementById('lengthInput');
+      const psaInput = document.getElementById('psaInput');
+      const ellipsoidVolume = document.getElementById('ellipsoidVolume');
+      const bulletVolume = document.getElementById('bulletVolume');
+      const ellipsoidDensity = document.getElementById('ellipsoidDensity');
+      const bulletDensity = document.getElementById('bulletDensity');
+
+      function getPositiveNumber(input) {
+        const value = Number.parseFloat(input.value);
+        return Number.isFinite(value) && value > 0 ? value : null;
+      }
+
+      function formatVolume(value) {
+        return `${value.toFixed(1)} cc`;
+      }
+
+      function formatDensity(psa, volume) {
+        return `${(psa / volume).toFixed(3)} ng/mL/cc`;
+      }
+
+      function updateCalculator() {
+        const width = getPositiveNumber(widthInput);
+        const height = getPositiveNumber(heightInput);
+        const length = getPositiveNumber(lengthInput);
+        const psa = getPositiveNumber(psaInput);
+
+        if (!width || !height || !length) {
+          ellipsoidVolume.textContent = '--';
+          bulletVolume.textContent = '--';
+          ellipsoidDensity.textContent = psa ? 'Enter dimensions' : 'Enter PSA';
+          bulletDensity.textContent = psa ? 'Enter dimensions' : 'Enter PSA';
+          return;
+        }
+
+        const base = width * height * length;
+        const ellipsoid = base * 0.523;
+        const bullet = base * 0.65;
+
+        ellipsoidVolume.textContent = formatVolume(ellipsoid);
+        bulletVolume.textContent = formatVolume(bullet);
+        ellipsoidDensity.textContent = psa ? formatDensity(psa, ellipsoid) : 'Enter PSA';
+        bulletDensity.textContent = psa ? formatDensity(psa, bullet) : 'Enter PSA';
+      }
+
+      [widthInput, heightInput, lengthInput, psaInput].forEach((input) => {
+        input.addEventListener('input', updateCalculator);
+      });
+
+      updateCalculator();
+    </script>
+  </body>
+</html>
