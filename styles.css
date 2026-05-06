@@ -455,6 +455,184 @@ h2 {
   gap: 18px;
 }
 
+.mortality-panel {
+  grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
+}
+
+.age-control-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.age-control,
+.result-card,
+.risk-meter,
+.context-band {
+  border: 1px solid var(--line);
+  background: rgba(7, 10, 18, 0.55);
+}
+
+.age-control {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+}
+
+.age-control label {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.age-control label span,
+.result-card > span,
+.risk-meter-label span {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.age-control label strong {
+  color: var(--ink);
+  font-size: clamp(2.1rem, 6vw, 3.4rem);
+  line-height: 0.9;
+}
+
+.age-number {
+  width: 100%;
+  min-height: 50px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  background: rgba(7, 10, 18, 0.82);
+  color: var(--ink);
+  font: inherit;
+  outline: none;
+}
+
+.age-number:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 4px rgba(32, 245, 210, 0.11);
+}
+
+.age-slider {
+  width: 100%;
+  accent-color: var(--cyan);
+}
+
+.age-control.mother .age-slider {
+  accent-color: var(--magenta);
+}
+
+.range-bounds {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 800;
+}
+
+.mortality-results {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.result-card {
+  display: grid;
+  min-height: 190px;
+  align-content: space-between;
+  padding: 20px;
+}
+
+.result-card strong {
+  margin: 20px 0 12px;
+  color: var(--ink);
+  font-size: clamp(2.4rem, 7vw, 4.1rem);
+  line-height: 0.9;
+}
+
+.result-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.5;
+}
+
+.father-card {
+  border-top: 3px solid var(--violet);
+}
+
+.mother-card {
+  border-top: 3px solid var(--magenta);
+}
+
+.combined-card {
+  border-top: 3px solid var(--cyan);
+}
+
+.risk-meter,
+.context-band {
+  grid-column: 1 / -1;
+  padding: 20px;
+}
+
+.risk-meter-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 14px;
+}
+
+.risk-meter-label strong {
+  color: var(--cyan);
+  font-size: 1.05rem;
+}
+
+.risk-meter-track {
+  height: 10px;
+  overflow: hidden;
+  background: rgba(244, 248, 255, 0.12);
+}
+
+.risk-meter-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--violet), var(--magenta), var(--cyan));
+  transition: width 0.45s ease;
+}
+
+.context-text {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.context-text strong {
+  color: var(--ink);
+}
+
+.pulse {
+  animation: pulse 0.35s ease;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.035);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
 .formula-grid article {
   display: grid;
   align-content: space-between;
@@ -559,6 +737,10 @@ h2 {
   .service-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .mortality-panel {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 820px) {
@@ -659,6 +841,10 @@ h2 {
   .expertise-banner,
   .calculator-panel,
   .formula-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mortality-results {
     grid-template-columns: 1fr;
   }
 
