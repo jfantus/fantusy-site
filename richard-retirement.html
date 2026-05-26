@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <meta name="description" content="A hidden retirement countdown and daily joke calendar for Richard.">
+    <title>Richard's Retirement Countdown | Fantusy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="assets/richard-retirement.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html">fantusy.org</a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="about.html">About me</a>
+        <a href="research.html">Research</a>
+        <a href="services.html">Services</a>
+        <a href="parental-mortality-calculator.html">Parental Mortality Calculator</a>
+        <a href="prostate-volume-calculator.html">Prostate Volume Calculator</a>
+      </nav>
+    </header>
+
+    <main class="content-page retirement-page">
+      <section class="retirement-hero" aria-labelledby="retirement-title">
+        <p class="eyebrow">Secret rounds</p>
+        <h1 id="retirement-title">Richard's retirement countdown.</h1>
+        <p class="lede">
+          One daily joke until April 1, when the chair finally puts down the scalpel and lets orthopedics figure it out.
+        </p>
+      </section>
+
+      <section class="countdown-grid" aria-label="Countdown to retirement">
+        <div class="timebox">
+          <strong id="days">0</strong>
+          <span>Days</span>
+        </div>
+        <div class="timebox">
+          <strong id="hours">0</strong>
+          <span>Hours</span>
+        </div>
+        <div class="timebox">
+          <strong id="minutes">0</strong>
+          <span>Minutes</span>
+        </div>
+        <div class="timebox">
+          <strong id="seconds">0</strong>
+          <span>Seconds</span>
+        </div>
+      </section>
+
+      <section class="retirement-finale" id="retirementFinale" hidden>
+        <p class="eyebrow">Retirement day</p>
+        <h2>Happy retirement, Richard.</h2>
+        <p>The OR is quieter, the anesthesia team is safer, and orthopedics is still looking for the bone saw.</p>
+      </section>
+
+      <section class="spotlight-panel" aria-labelledby="currentTitle">
+        <div class="spotlight-meta">
+          <span id="currentDay">Day 1</span>
+          <span id="currentDate">May 24, 2026</span>
+        </div>
+        <h2 id="currentTitle">Trauma Forecast</h2>
+        <p id="currentJoke"></p>
+        <div class="joke-progress" aria-hidden="true">
+          <div id="jokeProgressBar"></div>
+        </div>
+        <p class="progress-count" id="progressCount">0 / 313 jokes unlocked</p>
+      </section>
+
+      <section class="joke-calendar" id="jokeCalendar" aria-label="Daily retirement jokes"></section>
+
+      <p class="disclaimer">
+        Built with love, respect, and just enough roast to require a post-op note.
+      </p>
+    </main>
+  </body>
+</html>
